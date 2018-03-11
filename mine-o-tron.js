@@ -3,22 +3,25 @@
     // Global Status report
     var statusReport = null;
 
-    initialize();
+    async function run() {
+        initialize();
 
-    buildHub();
-    window.setTimeout(deployHub,3000);
-    window.setInterval(shipOre,2000);
+        buildHub();
+        window.setTimeout(deployHub, 3000);
+        window.setInterval(shipOre, 2000);
 
-    window.setInterval(fetchStatusReport, 2000);
-    window.setInterval(displayStatusReport, 2000);
+        window.setInterval(fetchStatusReport, 2000);
+        window.setInterval(displayStatusReport, 2000);
+    }
 
-
+    run();
     /**
      * Triggers the startup and resets everything
      */
     async function initialize() {
         var data = await $.getJSON("startup?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
         statusReport = data.startup;
+        console.log("Reboot");
     }
 
     /** 
@@ -66,7 +69,7 @@
         });
         console.log("Deploying " + hubId + " to sector", topSector[0]);
         await $.getJSON("deploy_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&sector_ids=" + topSector[0]).then();
-        
+
     }
 
 
