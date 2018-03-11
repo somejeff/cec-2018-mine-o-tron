@@ -3,6 +3,7 @@
     // Global Status report
     var statusReport = null;
     var parameters = null;
+    var timers = [];
 
     initialize();
 
@@ -10,10 +11,10 @@
 
 
         buildHub();
-        window.setInterval(shipOre, 2000);
-        window.setInterval(moveHub, Math.round((parameters.lifetime * parameters.ms_per_week) / 3));  // move around 3 times
-        window.setInterval(fetchStatusReport, parameters.ms_per_week*3); // fetch every week
-        window.setInterval(displayStatusReport, 1000);
+        timers.push(window.setInterval(shipOre, 2000));
+        timers.push(window.setInterval(moveHub, Math.round((parameters.lifetime * parameters.ms_per_week) / 3)));  // move around 3 times
+        timers.push(window.setInterval(fetchStatusReport, parameters.ms_per_week * 3)); // fetch every week
+        timers.push(window.setInterval(displayStatusReport, 1000));
     }
 
 
@@ -34,10 +35,15 @@
     /** 
      * Fetches the status Report and puts it in a global variable for everyone to use
      * Not concerned with displaying the report
+     * Call game over if the times up
      */
     async function fetchStatusReport() {
         var data = await $.getJSON("status_report?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
         statusReport = data.status_report;
+        if (data.description === "times up") {
+            // times up
+            gameOver();
+        }
     }
 
     /** 
@@ -48,6 +54,13 @@
         console.log("Week:" + statusReport.team.week);
         console.table(statusReport.hubs);
         console.log(statusReport);
+    }
+
+    function gameOver() {
+        timers.forEach(timer => {
+            window.clearInterval(timer);
+        });
+        console.log("Game Over");
     }
 
 
