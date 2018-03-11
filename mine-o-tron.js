@@ -11,8 +11,8 @@
 
         buildHub();
         window.setInterval(shipOre, 2000);
-        window.setInterval(moveHub, Math.round((parameters.lifetime / parameters.ms_per_week) / 3));  // move around 3 times
-        window.setInterval(fetchStatusReport, parameters.ms_per_week); // fetch every week
+        window.setInterval(moveHub, Math.round((parameters.lifetime * parameters.ms_per_week) / 3));  // move around 3 times
+        window.setInterval(fetchStatusReport, parameters.ms_per_week*3); // fetch every week
         window.setInterval(displayStatusReport, 1000);
     }
 
