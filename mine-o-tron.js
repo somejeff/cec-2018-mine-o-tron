@@ -7,16 +7,16 @@
     initialize();
 
     async function run() {
-        
+
 
         buildHub();
         window.setInterval(shipOre, 2000);
-        window.setInterval(moveHub, 30000);
-        window.setInterval(fetchStatusReport, 2000);
+        window.setInterval(moveHub, Math.round((parameters.costs.move.weeks * parameters.ms_per_week) / 3));  // move around 3 times
+        window.setInterval(fetchStatusReport, parameters.ms_per_week); // fetch every week
         window.setInterval(displayStatusReport, 1000);
     }
 
-    
+
     /**
      * Triggers the startup and resets everything
      */
@@ -61,7 +61,7 @@
         console.log("Build Hub: " + hubId);
         // deploy the hub as soon as it's ready
         var delay = parameters.costs.hub.weeks * parameters.ms_per_week; // total delay in ms before hub can be deployed
-        window.setTimeout(deployHub,delay);
+        window.setTimeout(deployHub, delay);
     }
 
     /** 
@@ -83,10 +83,10 @@
         var hubId = "H1";
         var sectorID = await findTopSector();
         await $.getJSON("move_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&sector_ids=" + sectorID).then();
-        console.log("Moving Hub: " + hubId + " to sector "+sectorID);
+        console.log("Moving Hub: " + hubId + " to sector " + sectorID);
     }
 
-    
+
     /** 
      * Ships Ore from a hub
      */
