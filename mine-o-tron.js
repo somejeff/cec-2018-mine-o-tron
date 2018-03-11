@@ -2,6 +2,7 @@
 (function () {
     // Global Status report
     var statusReport = null;
+    var parameters = null;
 
     initialize();
 
@@ -9,7 +10,6 @@
         
 
         buildHub();
-        window.setTimeout(deployHub, 3000);
         window.setInterval(shipOre, 2000);
         window.setInterval(moveHub, 30000);
         window.setInterval(fetchStatusReport, 2000);
@@ -23,6 +23,10 @@
     async function initialize() {
         var data = await $.getJSON("startup?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
         statusReport = data.startup;
+
+        data = await $.getJSON("parameters?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
+        parameters = data.parameters;
+
         console.log("Reboot");
         run();
     }
@@ -55,6 +59,9 @@
         var hubId = "H1"; // TODO random ID? UUID? Fetch cool names from the internet somewhere?
         await $.getJSON("build_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId).then();
         console.log("Build Hub: " + hubId);
+        // deploy the hub as soon as it's ready
+        var delay = parameters.costs.hub.weeks * parameters.ms_per_week; // total delay in ms before hub can be deployed
+        window.setTimeout(deployHub,delay);
     }
 
     /** 
