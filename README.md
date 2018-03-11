@@ -4,6 +4,9 @@
 ## :warning: Read Me First!
 **Full Disclosure** This project was created post-competition as an academic exercise only, purely to demonstrate an alternate approach to the challenge. None of this content was disclosed until after competition and judging.
 
+**Get the most out of this exercise**  Just looking at the end picture is not the goal of this exercise, the best way to learn from it is to look at the [commit history](https://github.com/somejeff/cec-2018-mine-o-tron/commits/develop) starting from the beginning, [Issues](https://github.com/somejeff/cec-2018-mine-o-tron/issues?utf8=%E2%9C%93&q=is%3Aissue) and Milestones, and releases.  Also, you can go to [The Zenhub Scrum Board](https://app.zenhub.com/workspace/o/somejeff/cec-2018-mine-o-tron/boards?repos=124766172)
+
+
 ## Design Process and Justifications
 ### Agile vs Waterfall
 We've chosen an agile methodology as an iterative approach, focus on the following goals:
