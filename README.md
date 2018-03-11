@@ -17,7 +17,9 @@ By delivering a minimum viable product (MVP) to our customer as soon possible wi
 We'll take customer feedback and work on creating a better algorithm and user experience.
 
 > If it **works**, who cares if it looks good, I'll buy it.  *<sub>- Ol' Musky Accounting Dept.</sub>*
+
 > If it **looks** good, who cares if it works, I'll buy it.  *<sub>- Ol' Musky Marketing Dept.</sub>*
+
 > If it looks good **and** works, I'll keep using it .  *<sub>- Ol' Musky Customer</sub>*
 
 The requirements indicate that the goal is to make more money, therefore a better algorithm takes precedence over user experience.
