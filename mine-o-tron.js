@@ -3,18 +3,20 @@
     // Global Status report
     var statusReport = null;
 
+    initialize();
+
     async function run() {
-        initialize();
+        
 
         buildHub();
         window.setTimeout(deployHub, 3000);
         window.setInterval(shipOre, 2000);
-
+        window.setInterval(moveHub, 30000);
         window.setInterval(fetchStatusReport, 2000);
-        window.setInterval(displayStatusReport, 2000);
+        window.setInterval(displayStatusReport, 1000);
     }
 
-    run();
+    
     /**
      * Triggers the startup and resets everything
      */
@@ -22,6 +24,7 @@
         var data = await $.getJSON("startup?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
         statusReport = data.startup;
         console.log("Reboot");
+        run();
     }
 
     /** 
@@ -40,6 +43,7 @@
     function displayStatusReport() {
         console.log("Week:" + statusReport.team.week);
         console.table(statusReport.hubs);
+        console.log(statusReport);
     }
 
 
@@ -58,6 +62,28 @@
      */
     async function deployHub() {
         var hubId = "H1";
+        var sectorID = await findTopSector();
+        console.log("Deploying " + hubId + " to sector", sectorID);
+        await $.getJSON("deploy_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&sector_ids=" + sectorID).then();
+
+    }
+
+
+    /** 
+     * Moves a hub if it's empty
+     */
+    async function moveHub() {
+        var hubId = "H1";
+        var sectorID = await findTopSector();
+        await $.getJSON("move_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&sector_ids=" + sectorID).then();
+        console.log("Moving Hub: " + hubId + " to sector "+sectorID);
+    }
+
+    
+    /** 
+     * Ships Ore from a hub
+     */
+    async function findTopSector() {
         var data = await $.getJSON("prospect_report?token=3efbdfd5be1d284d8b3dd660cc31f839").then();
         var report = data.prospect_report.report;
         // start with the first sector in the report
@@ -67,11 +93,8 @@
             // replace the topSector if the ore volume is higher
             topSector = (sector[2] > topSector[2]) ? sector : topSector;
         });
-        console.log("Deploying " + hubId + " to sector", topSector[0]);
-        await $.getJSON("deploy_hubs?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&sector_ids=" + topSector[0]).then();
-
+        return topSector[0]; // return the sectorID of the top sector
     }
-
 
     /** 
      * Ships Ore from a hub
@@ -79,7 +102,6 @@
     async function shipOre() {
         var hubId = "H1";
         await $.getJSON("ship_ore?token=3efbdfd5be1d284d8b3dd660cc31f839&hubs=" + hubId + "&insured=false").then();
-        console.log("Shipping Ore from: " + hubId);
     }
 
 })();
