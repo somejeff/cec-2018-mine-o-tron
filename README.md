@@ -29,9 +29,20 @@ The requirements indicate that the goal is to make more money, therefore a bette
 
 > During simulation, if there ROI is better than the previous MVP, we will ship it.
 
+As pointed out in this chart, our three Minimum Viable Products (MVP) delivered consistent improvements to the Return on Investment.
+![image](https://user-images.githubusercontent.com/5151941/37320542-96171a92-264a-11e8-8f31-50ce4a4e5993.png)
+
+* MVP-1 allowed an immediate ROI well ahead of schedule. The customer found that even though it may cost $50MM to build and deploy a single hub in a random location with ore, it still had a positive ROI.
+* MVP-2 had some added benefits of choosing a better location and moving around.
+* MVP-3 took the ROI from MVP-2 to scale up to multiple hubs.
+
+
+
 
 #### The K.I.S.S.T.W.D.W.T.T.T.T.T.T.T.T.W.E Principle
 Keep It Simple So That We Don't Waste Tremendous Time Totally Trying To Tackle The Whole Enchilada
+
+
 
 ---
 
@@ -54,3 +65,10 @@ for:
 
 We believe that after Sprint 0, we should have enough time for around 6 sprints before the competition ends.  
 
+## Critique of the design
+
+As we started in the browser console, and noticed that we could actually continue leveraging the provided user interface and the browser's JavaScript engine. A quick refresh of the browser page cleans up our environment for another test run.  This allowed us to quickly prototype.
+
+Because we were able to keep the initial lines of code short, we felt comfortable hard coding most values and only refactor if we felt that it was become too complex or unreadable.  For example, instead of placing the token as a variable, we realized that if the token ever changes, we can simply use a text editor's "Find and Replace".
+
+Similarly, we hard-coded the Hub ID, and only in MVP-3 did we start ramping up more than one hub.  
