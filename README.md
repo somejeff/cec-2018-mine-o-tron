@@ -9,7 +9,7 @@
 
 ## Design Process and Justifications
 ### Agile vs Waterfall
-We've chosen an agile methodology as an iterative approach, focus on the following goals:
+We've chosen an agile methodology as an iterative approach, focusing on the following goals:
 
 #### Return on Investment
 By delivering a minimum viable product (MVP) to our customer as soon possible will allow them to build a hub and start reaping the benefits well ahead of the competitors.
